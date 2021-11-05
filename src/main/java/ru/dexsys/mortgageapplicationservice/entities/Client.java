@@ -1,7 +1,6 @@
 package ru.dexsys.mortgageapplicationservice.entities;
 
 import lombok.Data;
-import lombok.Value;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import ru.dexsys.mortgageapplicationservice.entities.enums.Gender;
