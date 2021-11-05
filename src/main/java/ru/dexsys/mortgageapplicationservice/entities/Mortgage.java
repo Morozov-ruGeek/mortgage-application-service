@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -15,9 +16,8 @@ import java.util.Collection;
 public class Mortgage {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private UUID id = UUID.randomUUID();
 
     @Column(name = "credit_amount")
     private BigDecimal creditAmount;
