@@ -1,10 +1,14 @@
 package ru.dexsys.mortgageapplicationservice.entities;
 
 import lombok.Data;
+import lombok.Value;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.dexsys.mortgageapplicationservice.entities.enums.Gender;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,9 +36,12 @@ public class Client {
     private LocalDate birthday;
 
     @Column(name = "gender")
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Column(name = "salary")
+    @Min(value = 0)
+    @Max(value = 1000000000)
     private BigDecimal salary;
 
     @ManyToMany

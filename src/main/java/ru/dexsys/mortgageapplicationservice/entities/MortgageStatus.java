@@ -3,6 +3,7 @@ package ru.dexsys.mortgageapplicationservice.entities;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import ru.dexsys.mortgageapplicationservice.entities.enums.MortgageApplicationStatus;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -18,7 +19,8 @@ public class MortgageStatus {
     private UUID id = UUID.randomUUID();
 
     @Column(name = "name")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private MortgageApplicationStatus status;
 
     @CreationTimestamp
     @Column(name = "created_at")

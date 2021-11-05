@@ -5,6 +5,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -23,6 +25,8 @@ public class Mortgage {
     private BigDecimal creditAmount;
 
     @Column(name = "months_duration")
+    @Min(value = 0)
+    @Max(value = 1200)
     private Integer durationInMonths;
 
     @ManyToMany
