@@ -8,6 +8,8 @@ import ru.dexsys.mortgageapplicationservice.entities.enums.Gender;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,12 +25,19 @@ public class Client {
     private UUID id = UUID.randomUUID();
 
     @Column(name = "first_name")
+    @NotBlank
     private String firstName;
 
+    @Column(name = "patronymic")
+    @NotBlank
+    private String patronymic;
+
     @Column(name = "last_name")
+    @NotBlank
     private String lastName;
 
     @Column(name = "passport")
+    @NotNull
     private Integer passport;
 
     @Column(name = "client_birthday")
@@ -39,6 +48,7 @@ public class Client {
     private Gender gender;
 
     @Column(name = "salary")
+    @NotNull
     @Min(value = 0)
     @Max(value = 1000000000)
     private BigDecimal salary;

@@ -1,6 +1,7 @@
 package ru.dexsys.mortgageapplicationservice.entities;
 
 import lombok.Data;
+import lombok.NonNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 

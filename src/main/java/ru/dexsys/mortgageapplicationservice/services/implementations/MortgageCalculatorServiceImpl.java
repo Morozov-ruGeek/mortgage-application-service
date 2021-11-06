@@ -2,7 +2,7 @@ package ru.dexsys.mortgageapplicationservice.services.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.dexsys.mortgageapplicationservice.repositories.MortgageCalculatorRepository;
+import ru.dexsys.mortgageapplicationservice.repositories.MortgageRepository;
 import ru.dexsys.mortgageapplicationservice.services.MortgageCalculatorService;
 
 import java.math.BigDecimal;
@@ -12,11 +12,11 @@ public class MortgageCalculatorServiceImpl implements MortgageCalculatorService 
 
     private final double INTEREST_RATE = 15;
 
-    private final MortgageCalculatorRepository mortgageCalculatorRepository;
+    private final MortgageRepository mortgageRepository;
 
     @Autowired
-    public MortgageCalculatorServiceImpl(MortgageCalculatorRepository mortgageCalculatorRepository) {
-        this.mortgageCalculatorRepository = mortgageCalculatorRepository;
+    public MortgageCalculatorServiceImpl(MortgageRepository mortgageRepository) {
+        this.mortgageRepository = mortgageRepository;
     }
 
     /**
