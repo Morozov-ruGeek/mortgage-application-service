@@ -1,18 +1,14 @@
 package ru.dexsys.mortgageapplicationservice.entities;
 
 import lombok.Data;
-import lombok.NonNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -45,6 +41,16 @@ public class Mortgage {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    public Mortgage() {
+    }
+
+    public Mortgage(BigDecimal creditAmount, Integer durationInMonths, BigDecimal monthlyPayment, String status) {
+        this.creditAmount = creditAmount;
+        this.durationInMonths = durationInMonths;
+        this.monthlyPayment = monthlyPayment;
+        this.status = status;
+    }
 
     @Override
     public String toString() {

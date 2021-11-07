@@ -1,11 +1,12 @@
 package ru.dexsys.mortgageapplicationservice.dtos;
 
+import lombok.Getter;
 import ru.dexsys.mortgageapplicationservice.entities.Mortgage;
 
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.List;
 
+@Getter
 public class ClientDTO {
     private String firstName;
     private String patronymic;
@@ -29,9 +30,9 @@ public class ClientDTO {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Client: ")
-                .append("firstName: ").append(firstName)
+                .append("first name: ").append(firstName)
                 .append(" patronymic: ").append(patronymic)
-                .append(" lastName: ").append(lastName)
+                .append(" last name: ").append(lastName)
                 .append("; gender: ").append(gender)
                 .append("; passport: ").append(passport)
                 .append("; salary = ").append(salary)

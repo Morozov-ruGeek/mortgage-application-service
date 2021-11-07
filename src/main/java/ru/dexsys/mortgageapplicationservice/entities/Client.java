@@ -61,4 +61,17 @@ public class Client {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    public Client() {
+    }
+
+    public Client(String firstName, String patronymic, String lastName, Integer passport, LocalDate birthday, String gender, BigDecimal salary, Collection<Mortgage> mortgages) {
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.lastName = lastName;
+        this.passport = passport;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.salary = salary;
+        this.mortgages = mortgages;
+    }
 }

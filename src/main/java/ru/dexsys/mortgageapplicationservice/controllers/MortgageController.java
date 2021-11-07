@@ -8,7 +8,6 @@ import ru.dexsys.mortgageapplicationservice.entities.Client;
 import ru.dexsys.mortgageapplicationservice.services.ClientService;
 import ru.dexsys.mortgageapplicationservice.services.MortgageService;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -43,4 +42,6 @@ public class MortgageController {
                 .setMortgages(client.getMortgages())
                 .build();
     }
+
+
 }

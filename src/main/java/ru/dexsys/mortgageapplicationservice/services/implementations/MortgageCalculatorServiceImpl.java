@@ -25,8 +25,6 @@ public class MortgageCalculatorServiceImpl implements MortgageCalculatorService 
      * @return monthlyPayment
      * calculation for annuity payment
      */
-
-
     @Override
     public BigDecimal calculateMonthlyPayment(BigDecimal creditAmount, Integer durationInMonths) {
         double creditAmountInDouble = Double.parseDouble(String.valueOf(creditAmount));
