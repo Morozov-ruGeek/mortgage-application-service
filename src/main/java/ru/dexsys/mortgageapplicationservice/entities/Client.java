@@ -3,11 +3,8 @@ package ru.dexsys.mortgageapplicationservice.entities;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import ru.dexsys.mortgageapplicationservice.entities.enums.Gender;
 
 import javax.persistence.*;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -45,12 +42,9 @@ public class Client {
 
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private String gender;
 
     @Column(name = "salary")
-    @NotNull
-    @Min(value = 0)
-    @Max(value = 1000000000)
     private BigDecimal salary;
 
     @ManyToMany

@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.dexsys.mortgageapplicationservice.entities.Client;
 import ru.dexsys.mortgageapplicationservice.entities.Mortgage;
+import ru.dexsys.mortgageapplicationservice.entities.enums.MortgageApplicationStatus;
 import ru.dexsys.mortgageapplicationservice.repositories.MortgageRepository;
 import ru.dexsys.mortgageapplicationservice.services.ClientService;
 import ru.dexsys.mortgageapplicationservice.services.MortgageCalculatorService;
 import ru.dexsys.mortgageapplicationservice.services.MortgageService;
 
-import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.UUID;
 
 @Service
@@ -28,14 +29,20 @@ public class MortgageServiceImpl implements MortgageService {
         this.clientService = clientService;
     }
 
-//    todo check method added parameters in calculateMonthlyPayment, getMortgage
-    public String creditConfirmation(UUID id) {
+    @Override
+    public String creditConfirmation(UUID id, Mortgage mortgage) {
+        int minimumDifferenceForApproval = 2;
         Client client = clientService.findById(id).orElseThrow();
-        Mortgage mortgage = client.getMortgages().stream().filter();
-        if (client.getSalary() >= 2 * mortgageCalculatorService.calculateMonthlyPayment()){
-
+        Mortgage clientMortgage = client.getMortgages().stream().filter(mortgage::equals).findFirst().orElseThrow();
+        if (mortgageCalculatorService.calculateMonthlyPayment(mortgage.getCreditAmount(), mortgage.getDurationInMonths()).divide(client.getSalary()).intValue() >= minimumDifferenceForApproval) {
+            clientMortgage.setStatus(String.valueOf(MortgageApplicationStatus.APPROVED));
+            clientService.updateClient(id, client);
+            return String.valueOf(MortgageApplicationStatus.APPROVED);
+        } else {
+            clientMortgage.setStatus(String.valueOf(MortgageApplicationStatus.DENIED));
+            clientService.updateClient(id, client);
+            return String.valueOf(MortgageApplicationStatus.DENIED);
         }
-            return "Empty string";
     }
 
 

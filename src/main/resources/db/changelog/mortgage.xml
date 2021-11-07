@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+    <changeSet author="A_Morozov" id="mortgage_schema">
+        <createTable tableName="mortgage">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="credit_amount" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="months_duration" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="monthly_payment" type="DOUBLE"/>
+            <column name="status" type="varchar(125)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp"/>
+            <column name="updated_at" type="timestamp"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

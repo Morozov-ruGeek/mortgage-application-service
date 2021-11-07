@@ -15,6 +15,7 @@
     <description>mortgage-application-service</description>
     <properties>
         <java.version>11</java.version>
+        <hibernate.validator.version>6.1.5.Final</hibernate.validator.version>
     </properties>
     <dependencies>
         <dependency>
@@ -32,7 +33,7 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>6.1.5.Final</version>
+            <version>${hibernate.validator.version}</version>
         </dependency>
 
         <dependency>
@@ -44,6 +45,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

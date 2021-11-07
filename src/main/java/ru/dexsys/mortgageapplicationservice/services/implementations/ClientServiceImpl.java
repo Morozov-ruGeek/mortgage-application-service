@@ -23,4 +23,9 @@ public class ClientServiceImpl implements ClientService {
     public Optional<Client> findById(UUID id) {
         return clientRepository.findById(id);
     }
+
+    @Override
+    public void updateClient(UUID id, Client client) {
+        clientRepository.updateClientById(id, client);
+    }
 }
