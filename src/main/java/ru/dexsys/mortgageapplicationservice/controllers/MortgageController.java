@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.dexsys.mortgageapplicationservice.dtos.ClientDTO;
 import ru.dexsys.mortgageapplicationservice.dtos.MortgageApplicationDTO;
 import ru.dexsys.mortgageapplicationservice.entities.Client;
+import ru.dexsys.mortgageapplicationservice.entities.Mortgage;
+import ru.dexsys.mortgageapplicationservice.entities.enums.MortgageApplicationStatus;
 import ru.dexsys.mortgageapplicationservice.error_handling.InvalidDataException;
 import ru.dexsys.mortgageapplicationservice.error_handling.ResourceNotFoundException;
 import ru.dexsys.mortgageapplicationservice.services.ClientService;
@@ -34,9 +36,11 @@ public class MortgageController {
         if (bindingResult.hasErrors()) {
             throw new InvalidDataException(bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList()));
         }
-//        todo выполнить преобразование DTO в Entities и и раскидать по сервисам
-
-        throw new UnsupportedOperationException();
+        Mortgage mortgage = new Mortgage();
+        mortgage.setCreditAmount(mortgageApplicationDTO.getCreditAmount());
+        mortgage.setDurationInMonths(mortgageApplicationDTO.getDurationInMonths());
+        mortgage.setStatus(String.valueOf(MortgageApplicationStatus.PROCESSING));
+        clientService.saveClient(mortgageApplicationDTO);
     }
 
     @GetMapping("/{id}")
@@ -52,6 +56,4 @@ public class MortgageController {
                 .setMortgages(client.getMortgages())
                 .build();
     }
-
-
 }
