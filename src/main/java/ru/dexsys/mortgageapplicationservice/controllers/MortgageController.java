@@ -1,14 +1,20 @@
 package ru.dexsys.mortgageapplicationservice.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.dexsys.mortgageapplicationservice.dtos.ClientDTO;
 import ru.dexsys.mortgageapplicationservice.dtos.MortgageApplicationDTO;
 import ru.dexsys.mortgageapplicationservice.entities.Client;
+import ru.dexsys.mortgageapplicationservice.error_handling.InvalidDataException;
+import ru.dexsys.mortgageapplicationservice.error_handling.ResourceNotFoundException;
 import ru.dexsys.mortgageapplicationservice.services.ClientService;
 import ru.dexsys.mortgageapplicationservice.services.MortgageService;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/mortgage")
@@ -24,14 +30,18 @@ public class MortgageController {
     }
 
     @PostMapping("/application")
-    public void createMortgageApplication(@RequestBody MortgageApplicationDTO mortgageApplicationDTO) {
+    public void createMortgageApplication(@RequestBody @Validated MortgageApplicationDTO mortgageApplicationDTO, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new InvalidDataException(bindingResult.getAllErrors().stream().map(ObjectError::getDefaultMessage).collect(Collectors.toList()));
+        }
 //        todo выполнить преобразование DTO в Entities и и раскидать по сервисам
+
         throw new UnsupportedOperationException();
     }
 
     @GetMapping("/{id}")
     public ClientDTO getClientById(@PathVariable UUID id) {
-        Client client = clientService.findById(id).orElseThrow();
+        Client client = clientService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Client doesn't exist"));
         return new ClientDTO.ClientDTOBuilder()
                 .setFirstName(client.getFirstName())
                 .setPatronymic(client.getPatronymic())
